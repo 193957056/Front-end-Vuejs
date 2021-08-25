@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{msg}}</h2>
+    <p>-----------------</p>
+    <!--
+     <button v-on:click="msg='yama'">品牌</button>
+        <button v-on:click="msg='https://baidu.com'">网址</button>
+        -->
+    <!--    改进-->
+    <button v-on:click="brand">品牌</button>
+    <button @click="site">网址</button>
+</div>
+<script src="js/vue.js"></script>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                msg: ''
+            }
+        },
+        methods: {
+            // 品牌
+            brand() {
+                // alert('品牌');
+                this.msg='yama';
+            },
+            // 网址
+            site() {
+                // alert('网址');
+                this.msg='www.baidu.com';
+            }
+        }
+    }).mount("#app");
+</script>
+</body>
+</html>
