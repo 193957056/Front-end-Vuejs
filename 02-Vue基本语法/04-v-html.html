@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <h1>{{site}}</h1>
+  <p>---------------</p>
+  <div v-html="site"></div>
+  <p>=================</p>
+  <div v-html="intro"></div>
+
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const app = Vue.createApp({
+    data() {
+      return {
+        site: '<a href="http://www.baidu.com">百度</a>',
+        intro:'<button>点我</button>'
+
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

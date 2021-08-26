@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    [v-cloak]{
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h1 v-cloak>{{msg}}</h1>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  /*
+  * vue实例解析之前，h1标签有一个v-cloak
+  * vue实例解析之后，h1标签就没有v-cloak
+  *
+  * */
+ setTimeout(()=>{
+   const app = Vue.createApp({
+     data() {
+       return {
+         msg: 'yama'
+       }
+     }
+   }).mount('#app');
+ },2000)
+</script>
+</body>
+</html>

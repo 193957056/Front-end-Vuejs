@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--view start-->
+<div id="app">
+
+    <button @click="brand">品牌</button>
+    <button @click="site">网址</button>
+</div>
+<!--view end-->
+<script src="js/vue.js"></script>
+<script>
+    // ViewModel start
+    const app = Vue.createApp({
+        // model start
+        data() {
+            return {
+                msg: ''
+            }
+        },
+        // model end
+        methods: {
+            // 品牌
+            brand() {
+
+                this.msg = 'yama';
+            },
+            // 网址
+            site() {
+
+                this.msg = 'www.baidu.com';
+            }
+        }
+        // ViewModel end
+    }).mount("#app");
+</script>
+</body>
+</html>
