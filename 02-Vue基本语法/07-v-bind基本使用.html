@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <h1>{{msg}}</h1>
+<!--  <img src="" alt="">-->
+  <!--动态绑定-->
+  <img v-bind:src="imgUrl" v-bind:alt="alt">
+  <a v-bind:href="site">百度</a>
+
+<!--  简写  语法糖-->
+  <img :src="imgUrl" v-bind:alt="alt">
+  <a :href="site">百度</a>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const app = Vue.createApp({
+    data() {
+      return {
+        msg: 'yama',
+        imgUrl:'https://img14.360buyimg.com/pop/s590x470_jfs/t1/178808/36/20129/80729/611f05c0E789b2a76/867d5319bebb330f.jpg.webp',
+        alt:'风景be',
+        site:'https://www.baidu.com'
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>
