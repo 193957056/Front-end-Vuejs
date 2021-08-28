@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      text-align: center;
+    }
+    ul {
+      list-style: none;
+      line-height: 40px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h3>搜索列表</h3>
+  <label>
+    <input type="text" placeholder="请输入搜索的名字" v-model="searchStr">
+    <div>
+      <h3>排序</h3>
+      <button @click="setOrderType(2)">年龄升序</button>
+      <button @click="setOrderType(1)">年龄降序</button>
+      <button @click="setOrderType(0)">还原</button>
+    </div>
+    <ul>
+      <li v-for="(p,index) in filterPersons">{{index+1}}---姓名：{{p.name}}--性别：{{p.sex}}--年龄：{{p.age}}--手机：{{p.phone}}</li>
+    </ul>
+  </label>
+
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const app = Vue.createApp({
+    data() {
+      return {
+        persons: [
+          {name: '张三', sex: '男', age: 19, phone: '10086'},
+          {name: '李四', sex: '女', age: 20, phone: '10010'},
+          {name: '张三', sex: '男', age: 10, phone: '10086'},
+          {name: '李四', sex: '女', age: 22, phone: '10010'},
+          {name: '张三', sex: '男', age: 31, phone: '10086'},
+          {name: '李四', sex: '女', age: 15, phone: '10010'},
+          {name: '张三', sex: '男', age: 52, phone: '10086'},
+          {name: '李四', sex: '女', age: 53, phone: '10010'},
+          {name: '张三', sex: '男', age: 51, phone: '10086'},
+          {name: '李四', sex: '女', age: 21, phone: '10010'},
+          {name: '张三', sex: '男', age: 12, phone: '10086'},
+          {name: '李四', sex: '女', age: 13, phone: '10010'},
+          {name: '张三', sex: '男', age: 31, phone: '10086'},
+          {name: '李四', sex: '女', age: 15, phone: '10010'},
+          {name: '张三', sex: '男', age: 43, phone: '10086'},
+          {name: '李四', sex: '女', age: 16, phone: '10010'},
+          {name: '张三', sex: '男', age: 25, phone: '10086'},
+          {name: '李四', sex: '女', age: 26, phone: '10010'},
+          {name: '张三', sex: '男', age: 24, phone: '10086'},
+          {name: '李四', sex: '女', age: 62, phone: '10010'},
+          {name: '张三', sex: '男', age: 12, phone: '10086'},
+          {name: '李四', sex: '女', age: 62, phone: '10010'},
+          {name: '张三', sex: '男', age: 52, phone: '10086'},
+
+        ],
+        //关联数据框
+        searchStr:'',
+        // flag:0: 默认 1：升序 ：2 降序
+        orderType:0
+      }
+    },
+    //计算属性
+    computed:{
+      filterPersons(){
+        //1.取出相关的属性
+        const { persons,searchStr,orderType} = this;
+        //2.定义过滤数组
+        let arr = [...persons];
+        //3.根据条件按过滤
+        if(searchStr.trim()){
+          arr = persons.filter((p)=>{
+            return p.name.indexOf(searchStr) != -1;
+          })
+        }
+        //4.排序
+        if(orderType){
+
+          arr.sort((p1,p2)=>{
+            console.log(p1, p2);
+            if(orderType === 1){ // 降序
+              return p2.age - p1.age;
+            }else {
+              return p1.age - p2.age;
+            }
+          })
+        }
+        //5.返回过滤后的数组
+        return arr;
+      }
+    },
+    methods:{
+      setOrderType(orderType){
+        this.orderType = orderType;
+
+      }
+    }
+
+  }).mount('#app');
+</script>
+</body>
+</html>
