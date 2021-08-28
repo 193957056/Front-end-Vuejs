@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <h1>{{fullName}}</h1>
+</div>
+<script src="js/vue.js"></script>
+<script>
+
+
+
+  const app = Vue.createApp({
+    data() {
+      return {
+        firstName: 'yama',
+        lastName: 'zuo'
+      }
+    },
+    computed:{
+      // fullName(){
+      //   return this.firstName+'.'+this.lastName
+      // }
+      //计算属性中：setter(基本不会使用) 和getter(只读)
+      fullName:{
+        set(newValue){
+          console.log('--------set()------',newValue)
+        },
+        get(){
+          console.log('-----get()------');
+          return this.firstName+'.'+this.lastName
+        }
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>
