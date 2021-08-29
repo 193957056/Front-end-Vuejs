@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h1>{{msg}}</h1>
+  <!--勾选一个-->
+  <label for="">
+    <input type="checkbox" v-model="isAgree">同意member
+  </label>
+  <h2>是否同意:{{isAgree?'同意':'不同意'}}</h2>
+  <button :disabled="!isAgree">注册</button>
+  <p>===============</p>
+  <label for="">
+    兴趣爱好：
+  </label>
+  <!--2.多个绑定-->
+  <input type="checkbox" value="篮球" v-model="hobbies">篮球
+  <input type="checkbox" value="足球" v-model="hobbies">足球
+  <input type="checkbox" value="羽毛球" v-model="hobbies">羽毛球
+  <h2>用户的兴趣爱好：{{hobbies}}</h2>
+<!--3.值绑定-->
+  <label :for="star" v-for="star in stars">
+    <input type="checkbox" :value="star" :id="star" v-model="likes">{{star}}
+
+  </label>
+  <h2>喜欢的明星：{{likes}}</h2>
+</div>
+<script src="js/vue.js"></script>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'yama',
+              isAgree:false,
+              hobbies:[],
+              stars:['周杰伦','liudehua','彭于晏'],
+              likes:[]
+            }
+        },
+
+    }).mount('#app');
+</script>
+</body>
+</html>

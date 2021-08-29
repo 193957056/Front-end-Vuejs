@@ -29,7 +29,7 @@
       <button @click="setOrderType(0)">还原</button>
     </div>
     <ul>
-      <li v-for="(p,index) in filterPersons">{{index+1}}---姓名：{{p.name}}--性别：{{p.sex}}--年龄：{{p.age}}--手机：{{p.phone}}</li>
+      <li v-for="(p,index) in filterPersons" :key="id">{{index+1}}---姓名：{{p.name}}--性别：{{p.sex}}--年龄：{{p.age}}--手机：{{p.phone}}</li>
     </ul>
   </label>
 
