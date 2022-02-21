@@ -25,12 +25,12 @@
             <td>{{ obj.name }}</td>
 
             <!-- 如果价格超过100，就有red这个类 -->
-            <td :class="{ red: obj.price > 100 }">{{ obj.price }}</td>
+            <td :class="{red: obj.price > 100}">{{ obj.price }}</td>
+
             <td>{{ obj.time | formatDate }}</td>
             <td><a href="#" @click="delFn(obj.id)">删除</a></td>
           </tr>
-          <!-- 4. 统计得有数据才显示 -->
-          <tr v-if="list.length !== 0" style="background-color: #eee">
+          <tr style="background-color: #eee">
             <td>统计:</td>
             <td colspan="2">总价钱为: {{ allPrice }}</td>
             <td colspan="2">平均价: {{ avgPrice }}</td>
@@ -75,35 +75,39 @@
 </template>
 
 <script>
-// 目标: 侦听list改变 - 同步到本地localStorage里
-// 1. 侦听器-list
-import moment from "moment";
+// 目标: 总价和均价显示
+// 1. 末尾补tr - 显示总价和均价
+import moment from 'moment'
 export default {
   data() {
     return {
       name: "", // 名称
       price: 0, // 价格
-      // 3. 本地取出缓存list
-      list: JSON.parse(localStorage.getItem('pList')) || [],
+      list: [
+        { id: 100, name: "外套", price: 199, time: new Date('2010-08-12')},
+        { id: 101, name: "裤子", price: 34, time: new Date('2013-09-01') },
+        { id: 102, name: "鞋", price: 25.4, time: new Date('2018-11-22') },
+        { id: 103, name: "头发", price: 19900, time: new Date('2020-12-12') }
+      ],
     };
   },
   methods: {
     addFn() {
       if (this.name.trim().length === 0 || this.price === 0) {
-        alert("不能为空");
-        return;
+        alert("不能为空")
+        return
       }
 
-      let id =
-        this.list.length === 0 ? 100 : this.list[this.list.length - 1].id + 1;
+      // 解决bug: 无数组新增-list没有数据, id需要给一个固定值(以后id都是后台生成, 现在是模拟给一个id)
+      let id = this.list.length > 0 ? this.list[this.list.length - 1].id + 1 : 100
 
       this.list.push({
         // 当前数组最后一个对象的id+1作为新对象id值
         id: id,
         name: this.name,
         price: this.price,
-        time: new Date(),
-      });
+        time: new Date()
+      })
     },
     delFn(id){
      // 通过id找到这条数据在数组中下标
@@ -116,22 +120,16 @@ export default {
       return moment(val).format("YYYY-MM-DD");
     },
   },
+  // 2. 计算属性
   computed: {
       allPrice(){
+          // 3. 求总价
           return this.list.reduce((sum, obj) => sum += obj.price, 0)
       },
       avgPrice(){
+          // 4. 求均价 - 保留2位小数
           return (this.allPrice / this.list.length).toFixed(2)
       }
-  },
-  watch: {
-    list: {
-      handler(){
-        // 2. 存入本地
-        localStorage.setItem('pList', JSON.stringify(this.list))
-      },
-      deep: true
-    }
   }
 };
 </script>
