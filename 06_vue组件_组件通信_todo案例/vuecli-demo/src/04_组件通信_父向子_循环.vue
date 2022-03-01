@@ -1,25 +1,18 @@
 <template>
-  <div style="overflow: hidden;">
-    <div style="float: left;">
-      <MyProduct
-      v-for="(obj, ind) in list"
-      :key="obj.id"
-      :title="obj.proname"
-      :price="obj.proprice"
-      :intro="obj.info"
-      :index="ind"
-      @subprice="fn"
+  <div>
+    <MyProduct v-for="obj in list" :key="obj.id"
+    :title="obj.proname"
+    :price="obj.proprice"
+    :intro="obj.info"
     ></MyProduct>
-    </div>
-    <div style="float: left;">
-      <List :arr="list"></List>
-    </div>
   </div>
 </template>
 
 <script>
-import MyProduct from "./components/MyProduct_sub";
-import List from "./components/List";
+// 目标: 循环使用组件-分别传入数据
+// 1. 创建组件
+// 2. 引入组件
+import MyProduct from './components/MyProduct'
 export default {
   data() {
     return {
@@ -45,18 +38,11 @@ export default {
       ],
     };
   },
+  // 3. 注册组件
   components: {
-    MyProduct,
-    List,
-  },
-  methods: {
-    fn(inde, price) {
-      this.list[inde].proprice > 1 &&
-        (this.list[inde].proprice = (this.list[inde].proprice - price).toFixed(
-          2
-        ));
-    },
-  },
+    // MyProduct: MyProduct
+    MyProduct
+  }
 };
 </script>
 

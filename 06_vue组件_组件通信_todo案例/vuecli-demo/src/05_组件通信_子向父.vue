@@ -1,25 +1,20 @@
 <template>
-  <div style="overflow: hidden;">
-    <div style="float: left;">
-      <MyProduct
-      v-for="(obj, ind) in list"
-      :key="obj.id"
-      :title="obj.proname"
-      :price="obj.proprice"
-      :intro="obj.info"
-      :index="ind"
-      @subprice="fn"
+  <div>
+    <!-- 目标: 子传父 -->
+    <!-- 1. 父组件, @自定义事件名="父methods函数" -->
+    <MyProduct v-for="(obj, ind) in list" :key="obj.id"
+    :title="obj.proname"
+    :price="obj.proprice"
+    :intro="obj.info"
+    :index="ind"
+    @subprice="fn"
     ></MyProduct>
-    </div>
-    <div style="float: left;">
-      <List :arr="list"></List>
-    </div>
   </div>
 </template>
 
 <script>
-import MyProduct from "./components/MyProduct_sub";
-import List from "./components/List";
+
+import MyProduct from './components/MyProduct_sub'
 export default {
   data() {
     return {
@@ -46,17 +41,14 @@ export default {
     };
   },
   components: {
-    MyProduct,
-    List,
+    MyProduct
   },
   methods: {
-    fn(inde, price) {
-      this.list[inde].proprice > 1 &&
-        (this.list[inde].proprice = (this.list[inde].proprice - price).toFixed(
-          2
-        ));
-    },
-  },
+    fn(inde, price){
+      // 逻辑代码
+      this.list[inde].proprice > 1 && (this.list[inde].proprice = (this.list[inde].proprice - price).toFixed(2))
+    }
+  }
 };
 </script>
 

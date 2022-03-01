@@ -4,15 +4,14 @@
     <Pannel></Pannel>
     <Pannel></Pannel>
     <Pannel></Pannel>
-    
   </div>
 </template>
 
 <script>
-import Pannel from './components/Pannel.vue'
+import Pannel from './components/Pannel'
 export default {
-  components:{
-    Pannel:Pannel
+  components: {
+    Pannel: Pannel
   }
 }
 </script>
