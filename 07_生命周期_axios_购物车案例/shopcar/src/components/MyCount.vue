@@ -34,7 +34,7 @@ export default {
 .my-counter {
   display: flex;
   .inp {
-    width: 45px;
+    width: 55px;
     text-align: center;
     margin: 0 10px;
   }
